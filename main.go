@@ -11,10 +11,34 @@ import (
 )
 
 type Client struct {
-	Name      string
-	Table     int
-	Arrival   string
-	Departure string
+	Name         string
+	Table        int
+	Arrival      string
+	Departure    string
+	PricePerHour int
+}
+
+func (c *Client) calculateRevenue(openTime, closeTime string) int {
+	if c.Departure == "" {
+		return 0
+	}
+
+	arrivalHour, _ := strconv.Atoi(strings.Split(c.Arrival, ":")[0])
+	departureHour, _ := strconv.Atoi(strings.Split(c.Departure, ":")[0])
+	totalHours := departureHour - arrivalHour
+
+	if totalHours < 1 {
+		totalHours = 1
+	}
+
+	if c.Arrival < openTime {
+		arrivalHour, _ = strconv.Atoi(strings.Split(openTime, ":")[0])
+	}
+	if c.Departure > closeTime {
+		departureHour, _ = strconv.Atoi(strings.Split(closeTime, ":")[0])
+	}
+
+	return totalHours * c.PricePerHour
 }
 
 func main() {
@@ -22,8 +46,10 @@ func main() {
 	var openTime, closeTime string
 	var clients = make(map[string]Client)
 	var waitList []string
+	totalRevenue := make(map[int]int)
+	workingTime := make(map[int]int)
 
-	file, err := os.Open("input_file.txt")
+	file, err := os.Open("C:\\Users\\drop-\\GolandProjects\\awesomeProject\\yadro_test\\test\\input_file.txt")
 	if err != nil {
 		log.Fatal(err)
 	}
@@ -90,6 +116,15 @@ func main() {
 				client.Departure = eventTime
 				delete(clients, eventName)
 				fmt.Println(eventTime, eventID, eventName)
+
+				revenue := client.calculateRevenue(openTime, closeTime)
+				totalRevenue[clients[eventName].Table] += revenue
+
+				arrivalHour, _ := strconv.Atoi(strings.Split(clients[eventName].Arrival, ":")[0])
+				departureHour, _ := strconv.Atoi(strings.Split(clients[eventName].Departure, ":")[0])
+				workingHours := departureHour - arrivalHour
+				workingTime[clients[eventName].Table] += workingHours
+
 				if len(waitList) > 0 {
 					firstClient := waitList[0]
 					waitList = waitList[1:]
@@ -112,4 +147,12 @@ func main() {
 	}
 
 	fmt.Println(closeTime)
+
+	// Print total revenue and working time for each table
+	for tableNum, revenue := range totalRevenue {
+		workingHours := workingTime[tableNum]
+		workingMinutes := workingHours % 60
+		workingHours /= 60
+		fmt.Printf("%d %d %02d:%02d\n", tableNum, revenue, workingHours, workingMinutes)
+	}
 }
