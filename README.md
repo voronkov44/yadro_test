@@ -51,7 +51,7 @@ docker run -it -v c:/your_Path/input_file.txt:/opt/input_file.txt yadro-test:v1 
 
 Если вы запускаете на **linux**(Bash):
 ```no-highlight
-docker run -it -v pwd/test/input_file.txt:/opt/input_file.txt yadro-test:v1 /opt/input_file.txt
+docker run -it -v `pwd`/test/input_file.txt:/opt/input_file.txt yadro-test:v1 /opt/input_file.txt
 ```
 
 
