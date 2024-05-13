@@ -29,18 +29,18 @@ docker build . -t yadro-test:v1
 docker images
 ```
 
-**3.** Копируем IMAGE ID
+Должна появиться такая табличка(IMAGE ID будет различаться)
 
 
 | REPOSITORY    | TAG        | IMAGE ID           |  CREATED          |  SIZE  | 
 | :-----------: |:----------:| :----------------: | :---------------: | :----: |
-| none          | none       | 80e32ad3(копируем) | About an hour ago | 9.17MB |
+| yadro-test    | v1         | 80e32ad3s342       | About an hour ago | 9.17MB |
 
 
-**4.** Запускаем приложение в контейнере Docker следующей командой, указывая IMAGE ID после флага -it, который ранее копировали:
+**3.** Запускаем приложение в контейнере Docker следующей командой, указывая IMAGE ID после флага -it, который ранее копировали:
 
 ```no-highlight
-docker run -it (указываем ID IMAGE который копировали)
+docker run -it yadro-test
 ```
 
 
