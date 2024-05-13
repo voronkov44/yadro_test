@@ -37,11 +37,21 @@ docker images
 | yadro-test    | v1         | 80e32ad3s342       | About an hour ago | 9.17MB |
 
 
+## **Запуск приложения**
+
 **3.** Запускаем приложение в контейнере Docker следующей командой:
 
+Если вы запускаете на Windows(powerShell):
 ```no-highlight
-docker run -it yadro-test:v1
+docker run -it -v c:/Path/input_file.txt:/opt/input_file.txt yadro-test:v1 /opt/input_file.txt
 ```
+**путь до файла подставляете свой**
+
+Если вы запускаете на linux (Bash):
+```no-highlight
+docker run -it -v pwd/test/input_file.txt:/opt/input_file.txt yadro-test:v1 /opt/input_file.txt
+```
+
 
 
 
