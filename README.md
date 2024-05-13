@@ -41,14 +41,15 @@ docker images
 
 **3.** Запускаем приложение в контейнере Docker следующей командой:
 
-Если вы запускаете на Windows(powerShell):
+Если вы запускаете на **Windows**(powerShell):
 ```no-highlight
 docker run -it -v c:/your_Path/input_file.txt:/opt/input_file.txt yadro-test:v1 /opt/input_file.txt
 ```
 
 **Нужно указать свой путь до файла**
 
-Если вы запускаете на linux (Bash):
+
+Если вы запускаете на **linux**(Bash):
 ```no-highlight
 docker run -it -v pwd/test/input_file.txt:/opt/input_file.txt yadro-test:v1 /opt/input_file.txt
 ```
