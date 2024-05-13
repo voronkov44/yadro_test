@@ -19,6 +19,8 @@ cd yadro_test
 
 **1.** Собираем образ Docker следующей командой:
 
+Если не установлен [Docker](https://docs.docker.com/) смотрите зависимости
+
 ```no-highlight
 docker build . -t yadro-test:v1
 ```
@@ -84,6 +86,8 @@ docker run -it -v `pwd`/your_file.txt:/opt/your_file.txt yadro-test:v1 /opt/your
 
 ```
 
+## **Зависимости**
+Установка пакета [Docker Engine](https://docs.docker.com/engine/install/)
 
 
 
