@@ -40,7 +40,7 @@ docker images
 **3.** Запускаем приложение в контейнере Docker следующей командой:
 
 ```no-highlight
-docker run -it yadro-test
+docker run -it yadro-test:v1
 ```
 
 
