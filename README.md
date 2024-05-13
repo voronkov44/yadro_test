@@ -52,6 +52,41 @@ docker run -it -v c:/Path/input_file.txt:/opt/input_file.txt yadro-test:v1 /opt/
 docker run -it -v pwd/test/input_file.txt:/opt/input_file.txt yadro-test:v1 /opt/input_file.txt
 ```
 
+## **Входной файл**
+
+Если вы хотите поменять входные данные на свои:
+
+На **Windows**(powerShell):
+
+1)Cоздаете файл в директории /test/
+
+2)Наполняете файл входными данными
+
+3)Запускаете приложение в контейнере Docker, указывая путь к вашему файлу, следующей командой:
+
+```no-highlight
+docker run -it -v c:/your_Path/test/your_file.txt:/opt/your_file.txt yadro-test:v1 /opt/your_file.txt
+```
+
+На **Linux**(Bash):
+
+1)Cоздаете файл в директории /test/
+
+2)Наполняете файл входными данными
+
+3)Запускаете приложение в контейнере Docker, указывая путь к вашему файлу, следующей командой:
+
+```no-highlight
+docker run -it -v `pwd`/your_file.txt:/opt/your_file.txt yadro-test:v1 /opt/your_file.txt
+
+```
+
+
+
+
+
+
+
 
 
 
