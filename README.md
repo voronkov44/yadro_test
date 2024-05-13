@@ -37,7 +37,7 @@ docker images
 | yadro-test    | v1         | 80e32ad3s342       | About an hour ago | 9.17MB |
 
 
-**3.** Запускаем приложение в контейнере Docker следующей командой, указывая IMAGE ID после флага -it, который ранее копировали:
+**3.** Запускаем приложение в контейнере Docker следующей командой:
 
 ```no-highlight
 docker run -it yadro-test
