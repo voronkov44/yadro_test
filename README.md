@@ -20,7 +20,7 @@ cd yadro_test
 **1.** Собираем образ Docker следующей командой:
 
 ```no-highlight
-docker build .
+docker build . -t yadro-test:v1
 ```
 
 **2.** Просматриваем образ Docker следующей командой:
