@@ -49,7 +49,7 @@ func main() {
 	totalRevenue := make(map[int]int)
 	workingTime := make(map[int]int)
 
-	file, err := os.Open("C:\\Users\\drop-\\GolandProjects\\awesomeProject\\yadro_test\\test\\input_file.txt")
+	file, err := os.Open("/opt/test/input_file.txt")
 	if err != nil {
 		log.Fatal(err)
 	}

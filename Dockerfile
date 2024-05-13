@@ -1,9 +1,11 @@
 FROM golang:1.22-alpine as builder
-WORKDIR /Users/drop-/GolandProjects/awesomeProject/yadro_test
+WORKDIR /opt
 COPY . .
-RUN go mod download
 RUN go build -o /main main.go
 # Финальный этап, копируем собранное приложение
 FROM alpine:3.17
-COPY --from=builder main /bin/main
-ENTRYPOINT ["/bin/main"]
+WORKDIR /opt
+COPY --from=builder main /opt/main
+COPY test /opt/test/
+
+ENTRYPOINT ["/opt/main"]
