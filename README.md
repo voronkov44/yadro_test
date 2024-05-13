@@ -19,7 +19,7 @@ cd yadro_test
 
 **1.** Собираем образ Docker следующей командой:
 
-Если не установлен [Docker](https://docs.docker.com/) смотрите зависимости
+Если не установлен [Docker](https://docs.docker.com/) смотрите [зависимости](https://github.com/voronkov44/yadro_test/blob/main/README.md#%D0%B7%D0%B0%D0%B2%D0%B8%D1%81%D0%B8%D0%BC%D0%BE%D1%81%D1%82%D0%B8)
 
 ```no-highlight
 docker build . -t yadro-test:v1
