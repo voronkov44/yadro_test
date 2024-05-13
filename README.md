@@ -43,14 +43,16 @@ docker images
 
 Если вы запускаете на Windows(powerShell):
 ```no-highlight
-docker run -it -v c:/Path/input_file.txt:/opt/input_file.txt yadro-test:v1 /opt/input_file.txt
+docker run -it -v c:/your_Path/input_file.txt:/opt/input_file.txt yadro-test:v1 /opt/input_file.txt
 ```
-**путь до файла подставляете свой**
+
+**Нужно указать свой путь до файла**
 
 Если вы запускаете на linux (Bash):
 ```no-highlight
 docker run -it -v pwd/test/input_file.txt:/opt/input_file.txt yadro-test:v1 /opt/input_file.txt
 ```
+
 
 ## **Входной файл**
 
