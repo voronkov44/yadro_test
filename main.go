@@ -44,9 +44,11 @@ func main() {
 	// Чтение времени работы
 	scanner.Scan()
 	workingHours := strings.Split(scanner.Text(), " ")
-	openTime = workingHours[0]
-	closeTime = workingHours[1]
-	fmt.Println(openTime)
+	if len(workingHours) >= 2 {
+		openTime = workingHours[0]
+		closeTime = workingHours[1]
+		fmt.Println(openTime)
+	}
 
 	// Чтение цены стола за час
 	scanner.Scan()
