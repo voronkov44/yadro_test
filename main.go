@@ -8,6 +8,7 @@ import (
 	"sort"
 	"strconv"
 	"strings"
+	"time"
 )
 
 type Client struct {
@@ -18,35 +19,12 @@ type Client struct {
 	PricePerHour int
 }
 
-func (c *Client) calculateRevenue(openTime, closeTime string) int {
-	if c.Departure == "" {
-		return 0
-	}
-
-	arrivalHour, _ := strconv.Atoi(strings.Split(c.Arrival, ":")[0])
-	departureHour, _ := strconv.Atoi(strings.Split(c.Departure, ":")[0])
-	totalHours := departureHour - arrivalHour
-
-	if totalHours < 1 {
-		totalHours = 1
-	}
-
-	if c.Arrival < openTime {
-		arrivalHour, _ = strconv.Atoi(strings.Split(openTime, ":")[0])
-	}
-	if c.Departure > closeTime {
-		departureHour, _ = strconv.Atoi(strings.Split(closeTime, ":")[0])
-	}
-
-	return totalHours * c.PricePerHour
-}
-
 func main() {
 	var tables int
+	//var rev int
 	var openTime, closeTime string
 	var clients = make(map[string]Client)
 	var waitList []string
-	totalRevenue := make(map[int]int)
 	workingTime := make(map[int]int)
 
 	fileName := os.Args[1]
@@ -58,14 +36,34 @@ func main() {
 
 	scanner := bufio.NewScanner(file)
 
+	// Чтение количества столов
+	scanner.Scan()
+	numTablesStr := scanner.Text()
+	numTables, _ := strconv.Atoi(numTablesStr)
+
+	// Чтение времени работы
+	scanner.Scan()
+	workingHours := strings.Split(scanner.Text(), " ")
+	openTime = workingHours[0]
+	closeTime = workingHours[1]
+	fmt.Println(openTime)
+
+	// Чтение цены стола за час
+	scanner.Scan()
+	tablePriceStr := scanner.Text()
+	tablePrice, _ := strconv.Atoi(tablePriceStr)
+
 	for scanner.Scan() {
 		line := strings.Fields(scanner.Text())
+		if err != nil {
+			fmt.Println("Ошибка чтения файла", err)
+		}
+
 		if len(line) == 1 {
 			tables, _ = strconv.Atoi(line[0])
 		} else if len(line) == 2 {
 			openTime = line[0]
 			closeTime = line[1]
-			fmt.Println(openTime)
 		} else if len(line) >= 3 {
 			eventTime := line[0]
 			eventID, _ := strconv.Atoi(line[1])
@@ -89,7 +87,7 @@ func main() {
 					fmt.Println(eventTime, 13, "ClientUnknown")
 					continue
 				}
-				table, _ := strconv.Atoi(line[3])
+				table, _ := strconv.Atoi(line[1])
 				if client.Table != 0 && client.Table == table {
 					continue
 				}
@@ -118,9 +116,6 @@ func main() {
 				delete(clients, eventName)
 				fmt.Println(eventTime, eventID, eventName)
 
-				revenue := client.calculateRevenue(openTime, closeTime)
-				totalRevenue[clients[eventName].Table] += revenue
-
 				arrivalHour, _ := strconv.Atoi(strings.Split(clients[eventName].Arrival, ":")[0])
 				departureHour, _ := strconv.Atoi(strings.Split(clients[eventName].Departure, ":")[0])
 				workingHours := departureHour - arrivalHour
@@ -129,7 +124,7 @@ func main() {
 				if len(waitList) > 0 {
 					firstClient := waitList[0]
 					waitList = waitList[1:]
-					table, _ := strconv.Atoi(line[3])
+					table, _ := strconv.Atoi(line[1])
 					client.Table = table
 					clients[firstClient] = client
 					fmt.Printf("%s %d %s %d\n", eventTime, 12, firstClient, table)
@@ -149,11 +144,24 @@ func main() {
 
 	fmt.Println(closeTime)
 
-	// Print total revenue and working time for each table
-	for tableNum, revenue := range totalRevenue {
-		workingHours := workingTime[tableNum]
-		workingMinutes := workingHours % 60
-		workingHours /= 60
-		fmt.Printf("%d %d %02d:%02d\n", tableNum, revenue, workingHours, workingMinutes)
+	for i := 1; i <= numTables; i++ {
+		profit := (tablePrice * (timeDiffInMinutes(workingHours[0], workingHours[1]) / 60))
+		fmt.Printf("%d %d %s\n", i, profit, workingHours[1])
 	}
+
+}
+func timeDiffInMinutes(startTime string, endTime string) int {
+	start, _ := timeFromStr(startTime)
+	end, _ := timeFromStr(endTime)
+
+	diff := end.Sub(start)
+	return int(diff.Minutes())
+}
+
+func timeFromStr(str string) (time.Time, error) {
+	t, err := time.Parse("15:04", str)
+	if err != nil {
+		fmt.Println("Error parsing time:", err)
+	}
+	return t, err
 }
