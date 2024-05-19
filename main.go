@@ -86,7 +86,7 @@ func main() {
 			case 2:
 				client, ok := clients[eventName]
 				if !ok {
-					fmt.Println(eventTime, 13, "ClientUnknown")
+					fmt.Println(eventTime, 2, eventName)
 					continue
 				}
 				table, _ := strconv.Atoi(line[1])
@@ -148,6 +148,7 @@ func main() {
 
 	for i := 1; i <= numTables; i++ {
 		profit := (tablePrice * (timeDiffInMinutes(workingHours[0], workingHours[1]) / 60))
+
 		fmt.Printf("%d %d %s\n", i, profit, workingHours[1])
 	}
 
