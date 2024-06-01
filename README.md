@@ -16,6 +16,25 @@ cd yadro_test
 ## **Использование**
 
 Для сборки и запуска проекта необходимо выполнить следующие шаги:
+**0.** В связи с последними событиями(уход Docker hub из России), необходимо установить нужные нам образы:
+
+```no-highlight
+docker pull huecker.io/library/golang:1.22-alpine
+```
+
+```no-highlight
+docker pull huecker.io/library/alpine:3.17
+```
+
+Затем необходимо переименовать наши образы в приличное название xD и чтобы не менять Dockerfile:
+
+```no-highlight
+docker tag huecker.io/library/alpine:3.17 alpine:3.17
+```
+
+```no-highlight
+docker tag huecker.io/library/golang:1.22-alpine golang:1.22-alpine
+```
 
 **1.** Собираем образ Docker следующей командой:
 
