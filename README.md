@@ -27,7 +27,7 @@ docker pull huecker.io/library/golang:1.22-alpine
 docker pull huecker.io/library/alpine:3.17
 ```
 
-Затем необходимо переименовать наши образы в приличное название xD и чтобы не менять Dockerfile:
+Затем необходимо переименовать наши образы в приличное название xD:
 
 ```no-highlight
 docker tag huecker.io/library/alpine:3.17 alpine:3.17
