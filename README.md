@@ -37,6 +37,8 @@ docker tag huecker.io/library/alpine:3.17 alpine:3.17
 docker tag huecker.io/library/golang:1.22-alpine golang:1.22-alpine
 ```
 
+**источник от куда можно скачать образы:** https://huecker.io/ 
+
 **1.** Собираем образ Docker следующей командой:
 
 Если не установлен [Docker](https://docs.docker.com/) смотрите [зависимости](https://github.com/voronkov44/yadro_test/blob/main/README.md#%D0%B7%D0%B0%D0%B2%D0%B8%D1%81%D0%B8%D0%BC%D0%BE%D1%81%D1%82%D0%B8)
